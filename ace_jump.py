@@ -281,7 +281,9 @@ class AceJumpWordCommand(AceJumpCommand):
         return ""
 
     def regex(self):
-        return r'\b{}'
+        # This matches a character at the beginning of the word or after _
+        # It does not match a character directly followed by ' or "
+        return r"(\b|(?<=_)){}(?!'|\")"
 
     def after_jump(self, view):
         global mode
