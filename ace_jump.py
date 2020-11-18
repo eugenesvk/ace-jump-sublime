@@ -139,7 +139,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
 
         if len(command) == 1:
             self.char = command
-            if self.char == "<" or self.char == ">":
+            if self.char == "<" or self.char == ">" or self.char == "'":
                 # re.escape escapes these 2 characters but it isn't needed for view.find()
                 self.add_labels(self.regex().format(self.char))
             else:
