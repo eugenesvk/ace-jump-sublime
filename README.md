@@ -153,7 +153,7 @@ You can override the ```labels``` setting to provide your own set of labels to b
 
 ### Highlighting
 
-You can also set the syntsx scope that's used for highlighting by overriding ```labels_scope```. The default scope is ```invalid```.
+You can also set the syntax scope that's used for highlighting by overriding ```labels_scope```. The default scope is ```invalid```.
 
 ### Case sensitivity
 
