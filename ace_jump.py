@@ -1,5 +1,6 @@
 import sublime, sublime_plugin
 import re, itertools
+from AceJump.helper.popup import show_popup_mode
 
 last_index = 0
 hints = []
@@ -108,6 +109,10 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
             self.all_views,
             self.view_settings
         )
+
+        self.status_mode = settings.get('status_mode'  , False)
+        self.status_name =(settings.get('status_prefix', ''   ) + 'AceJump') if self.status_mode else ''
+        self.popup_mode  = settings.get('popup_mode'  , False)
 
         self.show_prompt(self.prompt(), self.init_value())
 
@@ -259,6 +264,13 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
 
         return "visible_region"
 
+    def reset_indicator(self, view, mode): # reset popup/status
+        if view and mode:
+            if self.popup_mode:
+                show_popup_mode(view, "")
+            if self.status_mode:
+                view.set_status(self.status_name, "")
+
 class AceJumpWordCommand(AceJumpCommand):
     """Specialized command for word-mode"""
 
@@ -274,6 +286,7 @@ class AceJumpWordCommand(AceJumpCommand):
     def after_jump(self, view):
         global mode
 
+        self.reset_indicator(view,mode)
         if mode == 3:
             view.run_command("move", {"by": "word_ends", "forward": True})
             mode = 0
@@ -293,6 +306,7 @@ class AceJumpCharCommand(AceJumpCommand):
     def after_jump(self, view):
         global mode
 
+        self.reset_indicator(view,mode)
         if mode == 3:
             view.run_command("move", {"by": "characters", "forward": True})
             mode = 0
@@ -321,6 +335,7 @@ class AceJumpLineCommand(AceJumpCommand):
     def after_jump(self, view):
         global mode
 
+        self.reset_indicator(view,mode)
         if mode == 3:
             view.run_command("move", {"by": "lines", "forward": True})
             view.run_command("move", {"by": "characters", "forward": False})
@@ -341,6 +356,7 @@ class AceJumpWithinLineCommand(AceJumpCommand):
     def after_jump(self, view):
         global mode
 
+        self.reset_indicator(view,mode)
         if mode == 3:
             view.run_command("move", {"by": "word_ends", "forward": True})
             mode = 0
@@ -354,24 +370,78 @@ class AceJumpSelectCommand(sublime_plugin.WindowCommand):
 
     def run(self):
         global mode
+        win  = self.window
+        view = win.active_view() #‽optional
 
         mode = 0 if mode == 1 else 1
+        cfg        	= sublime.load_settings("AceJump.sublime-settings")
+        status_mode	= cfg.get('status_mode', False)
+        icon       	= cfg.get("icon_select",'▋') #❙❚
+        status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
+        popup_mode 	= cfg.get('popup_mode' , False)
+        if view:
+            if mode: # show popup/status
+                if popup_mode:
+                    show_popup_mode(view, icon)
+                if status_mode:
+                    view.set_status(status_name, icon)
+            else:    # reset
+                if popup_mode:
+                    show_popup_mode(view, "")
+                if status_mode:
+                    view.set_status(status_name, "")
 
 class AceJumpAddCursorCommand(sublime_plugin.WindowCommand):
     """Command for turning on multiple cursor mode"""
 
     def run(self):
         global mode
+        win  = self.window
+        view = win.active_view() #‽optional
 
         mode = 0 if mode == 2 else 2
+        cfg        	= sublime.load_settings("AceJump.sublime-settings")
+        status_mode	= cfg.get('status_mode', False)
+        icon       	= cfg.get("icon_cursor",'⎀') #|❘❙❚
+        status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
+        popup_mode 	= cfg.get('popup_mode' , False)
+        if view:
+            if mode: # show popup/status
+                if popup_mode:
+                    show_popup_mode(view, icon)
+                if status_mode:
+                    view.set_status(status_name, icon)
+            else:    # reset
+                if popup_mode:
+                    show_popup_mode(view, "")
+                if status_mode:
+                    view.set_status(status_name, "")
 
 class AceJumpAfterCommand(sublime_plugin.WindowCommand):
     """Modifier-command which lets you jump behind a character, word or line"""
 
     def run(self):
         global mode
+        win  = self.window
+        view = win.active_view() #‽optional
 
         mode = 0 if mode == 3 else 3
+        cfg        	= sublime.load_settings("AceJump.sublime-settings")
+        status_mode	= cfg.get('status_mode', False)
+        icon       	= cfg.get("icon_after",'↷') #↶
+        status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
+        popup_mode 	= cfg.get('popup_mode' , False)
+        if view:
+            if mode: # show popup/status
+                if popup_mode:
+                    show_popup_mode(view, icon)
+                if status_mode:
+                    view.set_status(status_name, icon)
+            else:    # reset
+                if popup_mode:
+                    show_popup_mode(view, "")
+                if status_mode:
+                    view.set_status(status_name, "")
 
 class AddAceJumpLabelsCommand(sublime_plugin.TextCommand):
     """Command for adding labels to the views"""
