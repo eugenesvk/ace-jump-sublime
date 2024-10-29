@@ -1,9 +1,9 @@
 [
-{"keys":["ctrl+shift+;"	],"command":"ace_jump_word"       	},
-{"keys":["ctrl+shift+'"	],"command":"ace_jump_char"       	},
-{"keys":["ctrl+shift+."	],"command":"ace_jump_line"       	},
-{"keys":["ctrl+shift+,"	],"command":"ace_jump_within_line"	},
-{"keys":["alt+;"       	],"command":"ace_jump_select"     	},
-{"keys":["alt+'"       	],"command":"ace_jump_add_cursor" 	},
-{"keys":["alt+."       	],"command":"ace_jump_after"      	},
+{"keys":["ctrl+shift+;"	],"command":"ace_jump_word"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["ctrl+shift+'"	],"command":"ace_jump_char"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["ctrl+shift+."	],"command":"ace_jump_line"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["ctrl+shift+,"	],"command":"ace_jump_within_line"	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["alt+;"       	],"command":"ace_jump_select"     	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["alt+'"       	],"command":"ace_jump_add_cursor" 	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+{"keys":["alt+."       	],"command":"ace_jump_after"      	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
 ]
