@@ -1,11 +1,12 @@
 [
-{"keys":["super+shift+;"	],"command":"ace_jump_word"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["super+shift+'"	],"command":"ace_jump_char"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["super+shift+."	],"command":"ace_jump_line"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["super+shift+,"	],"command":"ace_jump_within_line"	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["ctrl+;"       	],"command":"ace_jump_select"     	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["ctrl+'"       	],"command":"ace_jump_add_cursor" 	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
-{"keys":["ctrl+."       	],"command":"ace_jump_after"      	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+// Old defaults          	                                  	//
+ {"keys":["super+shift+;"	],"command":"ace_jump_word"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["super+shift+'"	],"command":"ace_jump_char"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["super+shift+."	],"command":"ace_jump_line"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["super+shift+,"	],"command":"ace_jump_within_line"	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["ctrl+;"       	],"command":"ace_jump_select"     	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["ctrl+'"       	],"command":"ace_jump_add_cursor" 	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
+ {"keys":["ctrl+."       	],"command":"ace_jump_after"      	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"old"},]},
 
 // Chained Keycap            	                                  	// keycap-based mnemonics w=word
  {"keys":["super+j","super+w"	],"command":"ace_jump_word"       	,"context":[{"key":"setting.ace_jump_key","operator":"equal","operand":"chain_keycap"},]},
