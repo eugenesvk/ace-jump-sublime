@@ -5,6 +5,20 @@
 "search_case_sensitivity"    	: true     	, // Toggles case sensitive search in word and character modes.
 "save_files_after_jump"      	: false    	, // Saves all the files aceJump tried to parse. This setting will reset any linter warnings you might see during jump. By saving all effected files
 "jump_behind_last_characters"	: false    	, // If turned on, character mode will jump after a character it it's the last character on a line.
+"popup_mode"                 	: true     	,// show near-cursor-popup when mode is enabled (ace_jump_add_cursor, ace_jump_select, ace_jump_after)
+"status_mode"                	: true     	,// show status bar indicatro when mode is enabled (ace_jump_add_cursor, ace_jump_select, ace_jump_after)
+"status_prefix"              	: ""       	,// status bar indicators are ordered by their name, custom prefix allows changing the location of AceJump's status bar
+"icon_cursor"                	:"⎀"       	,//
+"icon_select"                	:"▋"       	,//
+"icon_after"                 	:"↷"       	,//
+"popup_flag"                 	:"ksel"    	,// space-separated list of popup flags
+  // Name full                    short   Comment (≝ default)
+  // NONE                         no      .
+  // COOPERATE_WITH_AUTO_COMPLETE acompl  display next to the auto complete menu
+  // HIDE_ON_MOUSE_MOVE           hmo     hide when the mouse is moved, clicked or scrolled
+  // HIDE_ON_MOUSE_MOVE_AWAY      hma     hide when the mouse is moved (unless towards the popup), or when clicked or scrolled
+  // KEEP_ON_SELECTION_MODIFIED   ksel    ≝don't hide when the selection is modified 4057
+  // HIDE_ON_CHARACTER_EVENT      hc      hide the popup when a character is typed 4057
 
 // View settings that should be respected when switching the syntax highlighting mode. In case a plugin you use adds a new setting to a view, you probably want to add it to this list.
 "view_settings": [
