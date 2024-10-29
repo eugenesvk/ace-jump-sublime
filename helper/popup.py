@@ -1,3 +1,4 @@
+import re
 import sublime, sublime_plugin
 
 re_sp = re.compile(r'\s+')
