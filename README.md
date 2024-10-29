@@ -151,6 +151,10 @@ The commands accept an optional Boolean `current_buffer_only` argument. When pre
 
 You can override the ```labels``` setting to provide your own set of labels to be used by AceJump.
 
+### Indicators
+
+When invoking 3 mode commands (`ace_jump_select`, `ace_jump_add_cursor`, and `ace_jump_after`) you can have visual indicators that a mode is on via a popup menu (e.g., when selection is on you'd see a ▋ symbol ![popup](./img/popup.png)) or in the statubar by setting `popup_mode` and `status_mode` settings. There are also additional settings for more control of these indicators, see `Preferences: AceJump Settings: Default`
+
 ### Highlighting
 
 You can also set the syntax scope that's used for highlighting by overriding ```labels_scope```. The default scope is ```invalid```.
