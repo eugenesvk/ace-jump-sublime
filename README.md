@@ -105,7 +105,14 @@ In case there are more places to jump to than labels available, labels will be b
 
 ## Customization
 
-In order to access AceJump settings, go to ```Preferences > Package Settings > AceJump > Settings - User```.
+In order to access AceJump settings, go to ```Preferences > Package Settings > AceJump > Settings - User``` or open command palette commands:
+
+  - `Preferences: AceJump Settings` to open default and user settings side-by-side
+  - `Preferences: AceJump Settings: Default`
+  - `Preferences: AceJump Settings: User`
+  - `Preferences: AceJump Keybinds: Default` to open default and user (common `Default (OSX).sublime-keymap` file, not AceJump-specific) keybinds side-by-side
+  - `Preferences: AceJump Keybinds: User`
+  - `Preferences: AceJump Keybinds`
 
 ### Key bindings
 
