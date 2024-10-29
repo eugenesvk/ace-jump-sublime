@@ -109,8 +109,26 @@ In order to access AceJump settings, go to ```Preferences > Package Settings > A
 
 ### Key bindings
 
-Go to ```Preferences > Package Settings > AceJump > Key Bindings - User```.
-You can then override the bindings for any of the following commands:
+Default keybindings are disabled to avoid conflicts with your other keybinds, you can enable them by adding __either__ of the following settings to your `Preferences.sublime-settings` file via `Preferences: Settings` command palette command (NOT `AceJump.sublime-settings`):
+
+  - `"ace_jump_key_single":true,`	every command mapped to a single key combo
+  - `"ace_jump_key_chain" :true,`	<kbd>⌃</kbd><kbd>j</kbd> as a prefix key (<kbd>⌘</kbd> on a Mac) with letter-based "mnemonics" like `W`ord
+  - `"ace_jump_key_chome" :true,`	<kbd>⌃</kbd><kbd>j</kbd> as a prefix key (<kbd>⌘</kbd> on a Mac) with more convenient home-row based locations
+
+| Command                	| Single                               	| Chain                                             	| CHome                                                                                                                           	|
+|------------------------	|--------------------------------------	|-------------------------------------------------- 	|-----------------------------------------------------------------------------------------------------------------------------    	|
+| `ace_jump_word`        	| <kbd>⇧</kbd><kbd>⌃</kbd><kbd>;</kbd> 	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>w</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>k</kbd>                                                                              	|
+| `ace_jump_char`        	| <kbd>⇧</kbd><kbd>⌃</kbd><kbd>'</kbd> 	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>c</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>l</kbd>                                                                              	|
+| `ace_jump_line`        	| <kbd>⇧</kbd><kbd>⌃</kbd><kbd>.</kbd> 	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>l</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>;</kbd>                                                                              	|
+| `ace_jump_within_line` 	| <kbd>⇧</kbd><kbd>⌃</kbd><kbd>,</kbd> 	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>i</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>j</kbd>                                                                              	|
+| ↓ Modes                	|                                      	|                                                   	|                                                                                                                                 	|
+| `ace_jump_add_cursor`  	| <kbd>⎇</kbd><kbd>'</kbd>             	| <kbd>⌃</kbd><kbd>j</kbd>,             <kbd>c</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>a</kbd>, <kbd>⌃</kbd><kbd>k</kbd>[^1] or <kbd>l</kbd> or <kbd>;</kbd> or <kbd>j</kbd>	|
+| `ace_jump_select`      	| <kbd>⎇</kbd><kbd>;</kbd>             	| <kbd>⌃</kbd><kbd>j</kbd>,             <kbd>s</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>s</kbd>, <kbd>⌃</kbd><kbd>k</kbd>[^1] or <kbd>l</kbd> or <kbd>;</kbd> or <kbd>j</kbd>	|
+| `ace_jump_after`       	| <kbd>⎇</kbd><kbd>.</kbd>             	| <kbd>⌃</kbd><kbd>j</kbd>,             <kbd>a</kbd>	| <kbd>⌃</kbd><kbd>j</kbd>, <kbd>⌃</kbd><kbd>f</kbd>, <kbd>⌃</kbd><kbd>k</kbd>[^1] or <kbd>l</kbd> or <kbd>;</kbd> or <kbd>j</kbd>	|
+
+[^1]: instead of enabling a mode completes the sequence in one keybind
+
+Or you can then override the bindings for any of the following commands via ```Preferences > Package Settings > AceJump > Key Bindings - User```:
 
 - ```ace_jump_word```
 - ```ace_jump_char```
