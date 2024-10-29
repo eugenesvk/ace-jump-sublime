@@ -114,6 +114,8 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
         self.status_name =(settings.get('status_prefix', ''   ) + 'AceJump') if self.status_mode else ''
         self.popup_mode  = settings.get('popup_mode'  , False)
 
+        self.change_theme = settings.get('change_theme', True)
+
         self.show_prompt(self.prompt(), self.init_value())
 
     def is_enabled(self):
@@ -206,10 +208,11 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
 
             self.views.remove(view)
 
-        set_views_syntax(self.all_views, list(itertools.repeat(
-            "Packages/AceJump/AceJump.tmLanguage",
-            len(self.all_views)
-        )))
+        if self.change_theme:
+            set_views_syntax(self.all_views, list(itertools.repeat(
+                "Packages/AceJump/AceJump.tmLanguage",
+                len(self.all_views)
+            )))
 
         set_views_settings(
             self.all_views,

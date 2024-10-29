@@ -5,6 +5,7 @@
 "search_case_sensitivity"    	: true     	, // Toggles case sensitive search in word and character modes.
 "save_files_after_jump"      	: false    	, // Saves all the files aceJump tried to parse. This setting will reset any linter warnings you might see during jump. By saving all effected files
 "jump_behind_last_characters"	: false    	, // If turned on, character mode will jump after a character it it's the last character on a line.
+"change_theme"               	: true     	,// replace theme when AceJump is active
 "popup_mode"                 	: true     	,// show near-cursor-popup when mode is enabled (ace_jump_add_cursor, ace_jump_select, ace_jump_after)
 "status_mode"                	: true     	,// show status bar indicatro when mode is enabled (ace_jump_add_cursor, ace_jump_select, ace_jump_after)
 "status_prefix"              	: ""       	,// status bar indicators are ordered by their name, custom prefix allows changing the location of AceJump's status bar
