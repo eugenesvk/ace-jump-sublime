@@ -167,6 +167,10 @@ Ace jump is case sensitive by default. Case sensitivity can be toggled on and of
 
 By setting ```jump_behind_last_characters``` to ```true```, AceJump will jump behind a character if it's the last character on a line, without the need to trigger jump after mode. This only works in character mode and is switched off by default.
 
+### Theme
+
+AceJump changes the theme to a blank one when labels are shown to make them more visible, by setting `change_theme` to `false` you can disable this. 
+
 ### Known issues
 
 It has been reported that the _Select mode_, _Multi cursors mode_ and _Jump after_ mode might not work using the specified keybinding.  
