@@ -1,0 +1,14 @@
+[
+{"caption":"Preferences: AceJump Settings"	,"command":"edit_settings"	,"args":{
+  "base_file":"${packages}/AceJump/AceJump.sublime-settings",
+  "user_file":"${packages}/User/AceJump.sublime-settings",
+  "default"  :"{\n\t$0\n}\n"}},
+{"caption":"Preferences: AceJump Settings: User"   	,"command":"open_file"     	,"args":{"file":"${packages}/User/AceJump.sublime-settings"}},
+{"caption":"Preferences: AceJump Settings: Default"	,"command":"open_file"     	,"args":{"file":"${packages}/AceJump/AceJump.sublime-settings"}},
+{"caption":"Preferences: AceJump Keybinds: Default"	,"command":"open_file"     	,"args":{"file":"${packages}/AceJump/Default (${platform}).sublime-keymap"}},
+{"caption":"Preferences: AceJump Keybinds: User"   	,"command":"open_file"     	,"args":{"file":"${packages}/User/Default (${platform}).sublime-keymap"}},
+{"caption":"Preferences: AceJump Keybinds"         	,"command":"edit_settings"	,"args":{
+  "base_file":"${packages}/AceJump/Default (${platform}).sublime-keymap",
+  "user_file":"${packages}/User/Default (${platform}).sublime-keymap",
+  "default"  :"{\n\t$0\n}\n"}},
+]
