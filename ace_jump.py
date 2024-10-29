@@ -60,7 +60,7 @@ def set_views_syntax(views, syntax):
     """Sets the syntax highlighting for all given views"""
 
     for i in range(len(views)):
-        views[i].set_syntax_file(syntax[i])
+        views[i].assign_syntax(syntax[i])
 
 def set_views_sel(views, selections):
     """Sets the selections for all given views"""
