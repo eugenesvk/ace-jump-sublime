@@ -221,7 +221,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
 
         if self.change_theme:
             set_views_syntax(self.all_views, list(itertools.repeat(
-                "Packages/AceJump/AceJump.tmLanguage",
+                "Packages/AceJump/AceJump.sublime-syntax",
                 len(self.all_views)
             )))
 
