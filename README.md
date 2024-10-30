@@ -157,7 +157,7 @@ When invoking 3 mode commands (`ace_jump_select`, `ace_jump_add_cursor`, and `ac
 
 ### Highlighting
 
-You can also set the syntax scope that's used for highlighting by overriding ```labels_scope```. The default scope is ```invalid```.
+You can also set the syntax scope that's used for highlighting by overriding ```labels_scope```. The default scope is ```invalid```. Also you can set the syntax scope for the carets via the `inactive_carets_scope` setting, e.g., `""` blank would hide the carets when labels are shown.
 
 ### Case sensitivity
 
