@@ -429,15 +429,14 @@ class AceJumpSelectCommand(sublime_plugin.WindowCommand):
         mode = M.JumpBefore if mode == M.JumpSelect else M.JumpSelect
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
-        icon       	= cfg.get("icon_select",'▋') #❙❚
         status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
         popup_mode 	= cfg.get('popup_mode' , False)
         if view:
             if mode: # show popup/status
                 if popup_mode:
-                    show_popup_mode(view, icon)
+                    show_popup_mode(view       , f"{mode:®}")
                 if status_mode:
-                    view.set_status(status_name, icon)
+                    view.set_status(status_name, f"{mode:®}")
             else:    # reset
                 if popup_mode:
                     show_popup_mode(view, "")
@@ -455,15 +454,14 @@ class AceJumpAddCursorCommand(sublime_plugin.WindowCommand):
         mode = M.JumpBefore if mode == M.AddCursor else M.AddCursor
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
-        icon       	= cfg.get("icon_cursor",'⎀') #|❘❙❚
         status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
         popup_mode 	= cfg.get('popup_mode' , False)
         if view:
             if mode: # show popup/status
                 if popup_mode:
-                    show_popup_mode(view, icon)
+                    show_popup_mode(view       , f"{mode:®}")
                 if status_mode:
-                    view.set_status(status_name, icon)
+                    view.set_status(status_name, f"{mode:®}")
             else:    # reset
                 if popup_mode:
                     show_popup_mode(view, "")
@@ -481,15 +479,14 @@ class AceJumpAfterCommand(sublime_plugin.WindowCommand):
         mode = M.JumpBefore if mode == M.JumpAfter else M.JumpAfter
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
-        icon       	= cfg.get("icon_after",'↷') #↶
         status_name	=(cfg.get('status_prefix', '') + 'AceJump') if status_mode else ''
         popup_mode 	= cfg.get('popup_mode' , False)
         if view:
             if mode: # show popup/status
                 if popup_mode:
-                    show_popup_mode(view, icon)
+                    show_popup_mode(view       , f"{mode:®}")
                 if status_mode:
-                    view.set_status(status_name, icon)
+                    view.set_status(status_name, f"{mode:®}")
             else:    # reset
                 if popup_mode:
                     show_popup_mode(view, "")
