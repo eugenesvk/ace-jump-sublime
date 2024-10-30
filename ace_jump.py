@@ -7,13 +7,50 @@ hints = []
 search_regex = r''
 
 next_search = False
+import re
+from typing import Union
 
-# MODES
-# 0: default (jumps in front of the selection)
-# 1: select
-# 2: add-cursor
-# 3: jump-after
-mode = 0
+from enum import auto, Flag, IntFlag
+class Mode(IntFlag):
+  #↓ unique modes	          ↓ abbreviations
+  JumpBefore     	= auto(); B	= JumpBefore	; JB	= B	; D	= B # jumps in front of the selection
+  JumpAfter      	= auto(); A	= JumpAfter 	; JA	= A	;
+  JumpSelect     	= auto(); S	= JumpSelect	; JS	= S	;
+  AddCursor      	= auto(); C	= AddCursor 	; AC	= C	; Cursor	= C
+  def __format__(self, spec):
+    """ print an icon of a mode like f"{Mode.N:®} or :i"""
+    ret = ''
+    s_remain = self
+    cfg = sublime.load_settings("AceJump.sublime-settings")
+    if spec in ['®','i','icon','img','image']:
+      if s_remain & Mode.JumpBefore   :
+        ret += cfg.get("icon_before",'↶')
+        s_remain ^= Mode.JumpBefore
+      if s_remain & Mode.JumpAfter    :
+        ret += cfg.get("icon_after",'↷')
+        s_remain ^= Mode.JumpAfter
+      if s_remain & Mode.JumpSelect   :
+        ret += cfg.get("icon_select",'▋')
+        s_remain ^= Mode.JumpSelect
+      if s_remain & Mode.AddCursor:
+        ret += cfg.get("icon_cursor",'⎀')
+        s_remain ^= Mode.AddCursor
+      if s_remain                       :
+        ret += "{s_remain.name}"
+        s_remain = Mode(0)
+      if ret:
+        return ret
+    return f"{self.name}"
+M = Mode # in Sublime's Py3.8 Enum Flag's members aren't iterable (need Py3.11)
+
+mode_names = { # unique text abbreviations per mode (combinations are handled in the Mode enum)
+  Mode.B	: [f"{M.B:®}",'B'	,'before'   		],
+  Mode.A	: [f"{M.A:®}",'A'	,'after'    		],
+  Mode.S	: [f"{M.S:®}",'S'	,'select'   		],
+  Mode.C	: [f"{M.C:®}",'C'	,'addcursor'		],
+ }
+
+mode = M.JumpBefore
 
 ace_jump_active = False
 
@@ -174,7 +211,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
         if self.valid_target(self.target):
             self.jump(self.labels.find(self.target))
 
-        mode = 0
+        mode = M.JumpBefore
         ace_jump_active = False
 
         """Saves changed views after jump is complete"""
@@ -254,7 +291,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
     def views_to_label(self):
         """Returns the views that still have to be labeled"""
 
-        if mode != 0:
+        if mode != M.JumpBefore:
             return [self.window.active_view()]
 
         return self.all_views[:] if len(self.views) == 0 else self.views
@@ -303,9 +340,9 @@ class AceJumpWordCommand(AceJumpCommand):
         global mode
 
         self.reset_indicator(view,mode)
-        if mode == 3:
+        if mode == M.JumpAfter:
             view.run_command("move", {"by": "word_ends", "forward": True})
-            mode = 0
+            mode = M.JumpBefore
 
 class AceJumpCharCommand(AceJumpCommand):
     """Specialized command for char-mode"""
@@ -323,16 +360,16 @@ class AceJumpCharCommand(AceJumpCommand):
         global mode
 
         self.reset_indicator(view,mode)
-        if mode == 3:
+        if mode == M.JumpAfter:
             view.run_command("move", {"by": "characters", "forward": True})
-            mode = 0
+            mode = M.JumpBefore
 
     def jump(self, index):
         global mode
 
         view = self.changed_views[self.view_for_index(index)]
         if self.jump_behind_last and "\n" in view.substr(hints[index].end()):
-            mode = 3
+            mode = M.JumpAfter
 
         return AceJumpCommand.jump(self, index)
 
@@ -352,10 +389,10 @@ class AceJumpLineCommand(AceJumpCommand):
         global mode
 
         self.reset_indicator(view,mode)
-        if mode == 3:
+        if mode == M.JumpAfter:
             view.run_command("move", {"by": "lines", "forward": True})
             view.run_command("move", {"by": "characters", "forward": False})
-            mode = 0
+            mode = M.JumpBefore
 
 class AceJumpWithinLineCommand(AceJumpCommand):
     """Specialized command for within-line-mode"""
@@ -373,9 +410,9 @@ class AceJumpWithinLineCommand(AceJumpCommand):
         global mode
 
         self.reset_indicator(view,mode)
-        if mode == 3:
+        if mode == M.JumpAfter:
             view.run_command("move", {"by": "word_ends", "forward": True})
-            mode = 0
+            mode = M.JumpBefore
 
     def get_region_type(self):
 
@@ -389,7 +426,7 @@ class AceJumpSelectCommand(sublime_plugin.WindowCommand):
         win  = self.window
         view = win.active_view() #‽optional
 
-        mode = 0 if mode == 1 else 1
+        mode = M.JumpBefore if mode == M.JumpSelect else M.JumpSelect
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
         icon       	= cfg.get("icon_select",'▋') #❙❚
@@ -415,7 +452,7 @@ class AceJumpAddCursorCommand(sublime_plugin.WindowCommand):
         win  = self.window
         view = win.active_view() #‽optional
 
-        mode = 0 if mode == 2 else 2
+        mode = M.JumpBefore if mode == M.AddCursor else M.AddCursor
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
         icon       	= cfg.get("icon_cursor",'⎀') #|❘❙❚
@@ -441,7 +478,7 @@ class AceJumpAfterCommand(sublime_plugin.WindowCommand):
         win  = self.window
         view = win.active_view() #‽optional
 
-        mode = 0 if mode == 3 else 3
+        mode = M.JumpBefore if mode == M.JumpAfter else M.JumpAfter
         cfg        	= sublime.load_settings("AceJump.sublime-settings")
         status_mode	= cfg.get('status_mode', False)
         icon       	= cfg.get("icon_after",'↷') #↶
@@ -525,14 +562,14 @@ class PerformAceJumpCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, target):
         global mode
-        if mode == 0 or mode == 3:
+        if mode == M.JumpBefore or mode == M.JumpAfter:
             self.view.sel().clear()
 
         self.view.sel().add(self.target_region(target))
         self.view.show(target)
 
     def target_region(self, target):
-        if mode == 1:
+        if mode == M.JumpSelect:
             for cursor in self.view.sel():
                 return sublime.Region(cursor.begin(), target)
 
