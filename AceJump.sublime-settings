@@ -12,6 +12,7 @@
 "icon_cursor"                	:"⎀"       	,//
 "icon_select"                	:"▋"       	,//
 "icon_after"                 	:"↷"       	,//
+"icon_before"                	:"↶"       	,//
 "popup_flag"                 	:"ksel"    	,// space-separated list of popup flags
   // Name full                    short   Comment (≝ default)
   // NONE                         no      .
