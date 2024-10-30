@@ -136,6 +136,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
 
         settings = sublime.load_settings("AceJump.sublime-settings")
         self.highlight = settings.get("labels_scope", "invalid")
+        self.inactive_carets_scope = settings.get("inactive_carets_scope","text.plain")
         self.labels = settings.get(
             "labels",
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -169,11 +170,12 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
             title, value,
             self.next_batch, self.on_input, self.submit
         )
+        self.add_faked_carets(self.all_views)
 
     def next_batch(self, command):
         """Displays the next batch of labels after pressing return"""
 
-        self.remove_labels()
+        self.remove_artifacts()
         self.show_prompt(self.prompt(), self.char)
 
     def on_input(self, command):
@@ -204,7 +206,7 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
         global next_search, mode, ace_jump_active
         next_search = False
 
-        self.remove_labels()
+        self.remove_artifacts()
         set_views_sel(self.all_views, self.sel)
         set_views_syntax(self.all_views, self.syntax)
 
@@ -219,6 +221,14 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
           for view in self.changed_views:
             if not view.is_read_only() and not view.is_dirty():
               view.run_command("save")
+
+    def add_faked_carets(self, views) -> None:
+        """After showing the prompt, we lose the view focus and can't see existing carets. Hence here, we use add_regions() to mimic existing carets."""
+        for view in views:
+            view.add_regions("ace_jump_faked_carets",
+                [sublime.Region(region.b) for region in view.sel()],
+                self.inactive_carets_scope,
+                flags=sublime.DRAW_EMPTY | sublime.DRAW_NO_FILL,)
 
     def add_labels(self, regex):
         """Adds labels to characters matching the regex"""
@@ -277,6 +287,15 @@ class AceJumpCommand(sublime_plugin.WindowCommand):
                 view = self.changed_views[self.view_for_index(breakpoint - 1)]
                 view.run_command("remove_ace_jump_labels")
                 last_breakpoint = breakpoint
+
+    def remove_faked_carets(self) -> None:
+        """Removes all previously added faked carets"""
+        for view in self.all_views:
+            view.erase_regions("ace_jump_faked_carets")
+
+    def remove_artifacts(self) -> None:
+        self.remove_labels()
+        self.remove_faked_carets()
 
     def jump(self, index):
         """Performs the jump action"""

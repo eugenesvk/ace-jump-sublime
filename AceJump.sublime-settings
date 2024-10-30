@@ -21,6 +21,7 @@
   // HIDE_ON_MOUSE_MOVE_AWAY      hma     hide when the mouse is moved (unless towards the popup), or when clicked or scrolled
   // KEEP_ON_SELECTION_MODIFIED   ksel    ≝don't hide when the selection is modified 4057
   // HIDE_ON_CHARACTER_EVENT      hc      hide the popup when a character is typed 4057
+"inactive_carets_scope"	: "text.plain"	,// Controls the color of inactive carets when inputting the character
 
 // View settings that should be respected when switching the syntax highlighting mode. In case a plugin you use adds a new setting to a view, you probably want to add it to this list.
 "view_settings": [
