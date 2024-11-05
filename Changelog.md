@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/ace-jump-sublime/compare/0.0.0...HEAD
+[unreleased]: https://github.com/eugenesvk/ace-jump-sublime/compare/st4107-2.1.1...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[st4107-2.1.1]: https://github.com/eugenesvk/ace-jump-sublime/releases/tag/st4107-2.1.1
+## [st4107-2.1.1]
+
 - __Fixed__
   + 🐞 syntax file errors with tabs unrecognized
-
-[0.0.0]: https://github.com/eugenesvk/ace-jump-sublime/releases/tag/0.0.0
-## [0.0.0]
