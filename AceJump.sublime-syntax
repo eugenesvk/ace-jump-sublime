@@ -1,10 +1,10 @@
 %YAML 1.2
 ---
 # sublimetext.com/docs/3/syntax.html
-name   	: AceJump	# remove all syntax highlighting when AceJump is active
-scope  	: text.ace_jump
-version	: 2
-hidden 	: true
+name   : AceJump  # remove all syntax highlighting when AceJump is active
+scope  : text.ace_jump
+version: 2
+hidden : true
 
 contexts:
   main:
