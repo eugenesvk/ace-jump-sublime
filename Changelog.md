@@ -22,5 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  + 🐞 syntax file errors with tabs unrecognized
+
 [0.0.0]: https://github.com/eugenesvk/ace-jump-sublime/releases/tag/0.0.0
 ## [0.0.0]
